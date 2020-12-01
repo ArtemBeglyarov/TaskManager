@@ -1,6 +1,8 @@
+package com.taskmanager.model;
+
 public class User {
 
-    int id;
+    private int id;
     private String firstName;
     private String lastName;
     private String userName;
