@@ -1,5 +1,7 @@
 package com.taskmanager.model;
 
+import com.taskmanager.ControllerTaskManager;
+
 public class Task {
     public enum TaskPriority {
         HIGHEST,
@@ -16,7 +18,7 @@ public class Task {
         CLOSED,
 
     }
-    int ID;
+    long taskID = ControllerTaskManager.toCreateID();
     private String name;
 
 }
