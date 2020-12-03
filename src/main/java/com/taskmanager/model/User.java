@@ -22,13 +22,11 @@ public class User {
     @Setter
     private String password;
     public User() {
-        this.userID = 0000;
+        this.userID = 1;
         this.firstName = "defaultUser";
         this.lastName = "defaultUser";
         this.userName = "defaultUser";
         this.password = "defaultUser";
-
-
     }
 
     public User(String firstName, String lastName, String userName, String password) {

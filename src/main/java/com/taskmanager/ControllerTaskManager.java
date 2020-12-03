@@ -1,16 +1,16 @@
 package com.taskmanager;
 
 import com.taskmanager.model.User;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.Random;
 import java.util.Scanner;
 
+
+
 public class ControllerTaskManager {
 
-    TaskManagerRepository taskManagerRepository = new TaskManagerRepository();
+
 
     public static long toCreateID() {
 
@@ -46,7 +46,8 @@ public class ControllerTaskManager {
     }
     public  User createUsersDefault() {
         User user = new User();
-        this.taskManagerRepository.addUserRepository(user.getUserID(),user);
+        RepositoryTaskManager.addUserRepository(user.getUserID(),user);
         return user;
     }
+
 }

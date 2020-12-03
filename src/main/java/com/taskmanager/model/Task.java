@@ -1,6 +1,7 @@
 package com.taskmanager.model;
 
 import com.taskmanager.ControllerTaskManager;
+import lombok.Getter;
 
 public class Task {
     public enum TaskPriority {
@@ -18,6 +19,8 @@ public class Task {
         CLOSED,
 
     }
+
+    @Getter
     long taskID = ControllerTaskManager.toCreateID();
     private String name;
 

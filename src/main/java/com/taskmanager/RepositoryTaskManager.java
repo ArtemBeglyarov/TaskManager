@@ -9,16 +9,17 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TaskManagerRepository implements Serializable {
+public class RepositoryTaskManager implements Serializable {
 
-    Map<Long, User> userMap = new HashMap<Long, User>();
-    Map<Long, Project> projectMap = new HashMap<Long,Project>();
+    final Map<Long, User> userMap = new HashMap<Long, User>();
+    Map<Long, Project> projectMap = new HashMap<Long, Project>();
     Map<Long, Task> taskMap = new HashMap<Long, Task>();
 
 
-    public void addUserRepository(Long userID, User user){
-        this.userMap.put(userID,user);
+    public  void addUserRepository(Long userID, User user) {
+        this.userMap.put(userID, user);
     }
+
     public  void getAllUsers() {
         for (User k : this.userMap.values()) {
             System.out.println(k.toString());
@@ -26,9 +27,11 @@ public class TaskManagerRepository implements Serializable {
         }
 
     }
-   public  void addTaskRepository() {
 
-   }
+    public void addTaskRepository() {
+
+    }
+
     public void addProjectRepository() {
 
     }
