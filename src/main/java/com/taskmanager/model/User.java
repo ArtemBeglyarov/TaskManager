@@ -1,7 +1,7 @@
 package com.taskmanager.model;
 
 
-import com.taskmanager.ControllerTaskManager;
+import com.taskmanager.ModelTaskManager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +22,7 @@ public class User {
     @Setter
     private String password;
     public User() {
-        this.userID = 1;
+        this.userID =ModelTaskManager.toCreateID();;
         this.firstName = "defaultUser";
         this.lastName = "defaultUser";
         this.userName = "defaultUser";
@@ -30,7 +30,7 @@ public class User {
     }
 
     public User(String firstName, String lastName, String userName, String password) {
-        this.userID = ControllerTaskManager.toCreateID();
+        this.userID = ModelTaskManager.toCreateID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;

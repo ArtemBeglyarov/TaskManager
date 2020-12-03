@@ -1,6 +1,6 @@
 package com.taskmanager.model;
 
-import com.taskmanager.ControllerTaskManager;
+import com.taskmanager.ModelTaskManager;
 import lombok.Getter;
 
 public class Task {
@@ -21,7 +21,7 @@ public class Task {
     }
 
     @Getter
-    long taskID = ControllerTaskManager.toCreateID();
+    long taskID = ModelTaskManager.toCreateID();
     private String name;
 
 }
