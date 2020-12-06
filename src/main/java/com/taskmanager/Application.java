@@ -7,7 +7,7 @@ public class Application {
         controllerTaskManager.createUsersDefault();
         controllerTaskManager.createUsersDefault();
         controllerTaskManager.createUsersDefault();
-        controllerTaskManager.repositoryTaskManager.getAllUsers();
+       RepositoryTaskManager.getAllUsers();
 
     }
 
