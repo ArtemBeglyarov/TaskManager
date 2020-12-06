@@ -1,21 +1,20 @@
 package com.taskmanager.model;
 
 import com.taskmanager.ModelTaskManager;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 
 public class Task {
-    public enum TaskPriority {
+    public enum Priority {
         HIGHEST,
         HIGH,
         NORMAL,
         LOW,
     }
 
-    public enum TaskStatus {
+    public enum Status {
         OPEN,
         SUSPENDED,
         ASSIGNED,
@@ -25,16 +24,16 @@ public class Task {
     }
     @Setter
     @Getter
-    long taskID = ModelTaskManager.toCreateID();
+    long taskID = ModelTaskManager.createID();
     @Setter
     @Getter
     private String name;
     @Setter
     @Getter
-    private TaskStatus status;
+    private Status status;
     @Setter
     @Getter
-    private TaskPriority priority;
+    private Priority priority;
     @Setter
     @Getter
     private User creator;
@@ -57,8 +56,8 @@ public class Task {
    // private User Assignee;
 
 
-    public Task(long taskID, String name, TaskStatus status, TaskPriority priority, User creator, String description, Date startData, Date duoDate, Date endDate, Project project) {
-        this.taskID = ModelTaskManager.toCreateID();
+    public Task(long taskID, String name, Status status, Priority priority, User creator, String description, Date startData, Date duoDate, Date endDate, Project project) {
+        this.taskID = ModelTaskManager.createID();
         this.name = name;
         this.status = status;
         this.priority = priority;
@@ -71,10 +70,10 @@ public class Task {
     }
 
     public Task() {
-        taskID = ModelTaskManager.toCreateID();
+        taskID = ModelTaskManager.createID();
         name = "default";
-        status = TaskStatus.OPEN;
-        priority = TaskPriority.LOW;
+        status = Status.OPEN;
+        priority = Priority.LOW;
         creator = new User();
         description = "default";
         startData = new Date();
