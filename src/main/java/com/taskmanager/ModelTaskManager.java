@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class ModelTaskManager {
 
-    RepositoryTaskManager repositoryTaskManager = new RepositoryTaskManager();
+
 
     public static long createID() {
 
@@ -39,14 +39,14 @@ public class ModelTaskManager {
 
         User user = new User(firstName,lastName,userName,password);
 
-        repositoryTaskManager.addUserRepository(user.getID(),user);
+        RepositoryTaskManager.addUserRepository(user.getID(),user);
 
 
         return user;
     }
     public  User createUsersDefault() {
         User user = new User();
-        repositoryTaskManager.addUserRepository(user.getID(),user);
+        RepositoryTaskManager.addUserRepository(user.getID(),user);
         return user;
     }
 

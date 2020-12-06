@@ -11,16 +11,27 @@ import java.util.Map;
 
 public class RepositoryTaskManager implements Serializable {
 
-    final Map<Long, User> userMap = new HashMap<>();
-    final Map<Long, Project> projectMap = new HashMap<>();
-    final Map<Long, Task> taskMap = new HashMap<>();
+    private static RepositoryTaskManager instance;
 
-    public void addUserRepository(Long ID, User user) {
-        this.userMap.put(ID, user);
+    private RepositoryTaskManager() {
+    }
+    public static RepositoryTaskManager getInstance() {
+        if (instance == null) {
+            instance = new RepositoryTaskManager();
+        }
+        return instance;
     }
 
-    public void getAllUsers() {
-        for (User k : this.userMap.values()) {
+    static final Map<Long, User> userMap = new HashMap<>();
+    static final Map<Long, Project> projectMap = new HashMap<>();
+    static final Map<Long, Task> taskMap = new HashMap<>();
+
+    public static void addUserRepository(Long ID, User user) {
+        userMap.put(ID, user);
+    }
+
+    public static void getAllUsers() {
+        for (User k : userMap.values()) {
             System.out.println(k.toString());
             System.out.println();
         }
