@@ -4,14 +4,14 @@ import com.taskmanager.ModelTaskManager;
 import lombok.Getter;
 
 public class Task {
-    public enum TaskPriority {
+    public enum Priority {
         HIGHEST,
         HIGH,
         NORMAL,
         LOW,
     }
 
-    public enum TaskStatus {
+    public enum Status {
         OPEN,
         SUSPENDED,
         ASSIGNED,
@@ -21,7 +21,7 @@ public class Task {
     }
 
     @Getter
-    long taskID = ModelTaskManager.toCreateID();
+    long taskID = ModelTaskManager.createID();
     private String name;
 
 }
