@@ -22,7 +22,7 @@ public class User {
     @Setter
     private String password;
     public User() {
-        this.userID =ModelTaskManager.toCreateID();;
+        this.userID =ModelTaskManager.toCreateID();
         this.firstName = "defaultUser";
         this.lastName = "defaultUser";
         this.userName = "defaultUser";
@@ -37,6 +37,7 @@ public class User {
         this.password = password;
     }
 
+
     @Override
     public String toString() {
         return "User - " + userName +
@@ -44,5 +45,9 @@ public class User {
                 "\n" + "First Name  - " + firstName +
                 "\n" + "Last Name  - " + lastName +
                 "\n" + "Password - " + password;
+
     }
+
+
+
 }

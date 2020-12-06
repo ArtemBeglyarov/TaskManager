@@ -24,7 +24,6 @@ public class RepositoryTaskManager implements Serializable {
             System.out.println(k.toString());
             System.out.println();
         }
-
     }
 
     public void addTaskRepository() {
