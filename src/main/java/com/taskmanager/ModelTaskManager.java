@@ -2,6 +2,8 @@ package com.taskmanager;
 
 import com.taskmanager.model.Project;
 import com.taskmanager.model.User;
+
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -73,5 +75,21 @@ public class ModelTaskManager {
         repository.addProject(project.getID(),project);
         return project;
     }
+    public static void serializeRepository(RepositoryTaskManager repository, OutputStream out) throws IOException {
+        ObjectOutputStream serialize = new ObjectOutputStream(out);
+        serialize.writeObject(repository);
+    }
 
+    public static RepositoryTaskManager deserializeRepository(InputStream in) throws IOException {
+        ObjectInputStream deserialize = new ObjectInputStream(in);
+
+        Building newBuilding = null;
+        try {
+            newBuilding = (Building) deserialize.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return newBuilding;
+    }
 }
