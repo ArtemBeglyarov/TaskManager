@@ -1,5 +1,6 @@
 package com.taskmanager;
 
+import com.taskmanager.model.Project;
 import com.taskmanager.model.User;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +11,19 @@ import java.util.Scanner;
 
 public class ModelTaskManager {
 
+    private static ModelTaskManager instance;
+    ModelTaskManager(){}
 
+    public static ModelTaskManager getInstance() {
+        if (instance == null) {
+            instance = new ModelTaskManager();
+        }
+        return instance;
+    }
+
+    Scanner scanner = new Scanner(System.in);
+
+    RepositoryTaskManager repository = new RepositoryTaskManager();
 
     public static long createID() {
 
@@ -24,7 +37,7 @@ public class ModelTaskManager {
     }
 
     public  User createUsers() {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("you First Name");
         String firstName = scanner.nextLine();
 
@@ -39,15 +52,26 @@ public class ModelTaskManager {
 
         User user = new User(firstName,lastName,userName,password);
 
-        RepositoryTaskManager.addUserRepository(user.getID(),user);
+        repository.addUser(user.getID(),user);
 
 
         return user;
     }
     public  User createUsersDefault() {
         User user = new User();
-        RepositoryTaskManager.addUserRepository(user.getID(),user);
+        repository.addUser(user.getID(),user);
         return user;
+    }
+    public Project createProject() {
+        System.out.println("Name Project");
+        String projectName = scanner.nextLine();
+
+        System.out.println("describe the project");
+        String description = scanner.nextLine();
+
+        Project project = new Project();
+        repository.addProject(project.getID(),project);
+        return project;
     }
 
 }

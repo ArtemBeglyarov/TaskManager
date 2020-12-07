@@ -1,44 +1,39 @@
 package com.taskmanager.model;
 
 import com.taskmanager.ModelTaskManager;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Project {
-    @Setter
-    @Getter
-    private long projectID;
-    @Getter
-    @Setter
+
+    private final long ID;
+
     private String nameProject;
-    @Getter
-    @Setter
+
     private List<User> users;
-    @Getter
-    @Setter
+
     private List<Task> tasks;
-    @Getter
-    @Setter
+
     private String description;
-    @Getter
-    @Setter
+
     private User creator;
 
 
-    public Project( ){
-        projectID = ModelTaskManager.toCreateID();
-        nameProject = "default";
-        users = new ArrayList<>();
-        tasks = new ArrayList<>();
-        description = "default";
-        creator = new User();
+    public Project() {
+        this.ID = ModelTaskManager.createID();
+        this.nameProject = "default";
+        this.users = new ArrayList<>();
+        this.tasks = new ArrayList<>();
+        this.description = "default";
+        this.creator = new User();
     }
 
-    public Project(long projectID, String nameProject, List<User> users, List<Task> tasks, String description, User creator) {
-        this.projectID = projectID;
+    public Project(String nameProject, List<User> users, List<Task> tasks, String description, User creator) {
+        this.ID = ModelTaskManager.createID();
         this.nameProject = nameProject;
         this.users = users;
         this.tasks = tasks;
@@ -49,12 +44,12 @@ public class Project {
     @Override
     public String toString() {
         return
-                    "projectID=" + projectID +
-                    ", nameProject='" + nameProject + '\'' +
-                    ", users=" + users +
-                    ", tasks=" + tasks +
-                    ", description='" + description + '\'' +
-                    ", creator=" + creator ;
+                "projectID=" + ID +
+                        ", nameProject='" + nameProject + '\'' +
+                        ", users=" + users +
+                        ", tasks=" + tasks +
+                        ", description='" + description + '\'' +
+                        ", creator=" + creator;
 
     }
 }
