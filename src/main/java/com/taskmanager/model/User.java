@@ -4,8 +4,10 @@ package com.taskmanager.model;
 import com.taskmanager.ModelTaskManager;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class User {
+public class User implements Serializable {
     private final long ID;
 
     private String firstName;

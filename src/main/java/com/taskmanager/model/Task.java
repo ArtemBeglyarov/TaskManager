@@ -3,18 +3,19 @@ package com.taskmanager.model;
 import com.taskmanager.ModelTaskManager;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class Task {
-    public enum Priority {
+public class Task implements Serializable {
+    public enum Priority implements Serializable{
         HIGHEST,
         HIGH,
         NORMAL,
         LOW,
     }
 
-    public enum Status {
+    public enum Status implements Serializable {
         OPEN,
         SUSPENDED,
         ASSIGNED,

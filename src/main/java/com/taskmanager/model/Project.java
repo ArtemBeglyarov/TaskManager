@@ -4,11 +4,12 @@ import com.taskmanager.ModelTaskManager;
 import lombok.Data;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Project {
+public class Project implements Serializable {
 
     private final long ID;
 

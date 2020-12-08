@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class ModelTaskManager {
 
+    RepositoryTaskManager repository = new RepositoryTaskManager();
     private static ModelTaskManager instance;
     ModelTaskManager(){}
 
@@ -25,7 +26,7 @@ public class ModelTaskManager {
 
     Scanner scanner = new Scanner(System.in);
 
-    RepositoryTaskManager repository = new RepositoryTaskManager();
+
 
     public static long createID() {
 
@@ -81,15 +82,15 @@ public class ModelTaskManager {
     }
 
     public static RepositoryTaskManager deserializeRepository(InputStream in) throws IOException {
+        RepositoryTaskManager repository = null;
+        try {
         ObjectInputStream deserialize = new ObjectInputStream(in);
 
-        Building newBuilding = null;
-        try {
-            newBuilding = (Building) deserialize.readObject();
+            repository = (RepositoryTaskManager) deserialize.readObject();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return newBuilding;
+        return repository;
     }
 }
