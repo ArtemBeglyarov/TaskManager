@@ -1,6 +1,6 @@
 package com.taskmanager.model;
 
-import com.taskmanager.ModelTaskManager;
+import com.taskmanager.Model;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -48,7 +48,7 @@ public class Task implements Serializable {
 
 
     public Task(String name, Status status, Priority priority, User creator, String description, Date startData, Date duoDate, Date endDate, Project project) {
-        this.ID = ModelTaskManager.createID();
+        this.ID = Model.createID();
         this.name = name;
         this.status = status;
         this.priority = priority;
@@ -61,7 +61,7 @@ public class Task implements Serializable {
     }
 
     public Task() {
-        ID = ModelTaskManager.createID();
+        ID = Model.createID();
         name = "default";
         status = Status.OPEN;
         priority = Priority.LOW;

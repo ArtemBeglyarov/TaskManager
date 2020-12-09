@@ -3,7 +3,7 @@ package com.taskmanager;
 import java.util.Scanner;
 
 public class View {
-    ControllerTaskManager controller = new ControllerTaskManager();
+    Controller controller = new Controller();
      public void consoleInput() {
 
          Scanner scanner = new Scanner(System.in);

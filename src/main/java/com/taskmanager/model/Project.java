@@ -1,6 +1,6 @@
 package com.taskmanager.model;
 
-import com.taskmanager.ModelTaskManager;
+import com.taskmanager.Model;
 import lombok.Data;
 
 
@@ -25,7 +25,7 @@ public class Project implements Serializable {
 
 
     public Project() {
-        this.ID = ModelTaskManager.createID();
+        this.ID = Model.createID();
         this.nameProject = "default";
         this.users = new ArrayList<>();
         this.tasks = new ArrayList<>();
@@ -34,7 +34,7 @@ public class Project implements Serializable {
     }
 
     public Project(String nameProject, List<User> users, List<Task> tasks, String description, User creator) {
-        this.ID = ModelTaskManager.createID();
+        this.ID = Model.createID();
         this.nameProject = nameProject;
         this.users = users;
         this.tasks = tasks;

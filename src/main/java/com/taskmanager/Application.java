@@ -7,23 +7,25 @@ import java.io.IOException;
 
 public class Application {
     public static void main(String[] args) throws IOException {
-        ModelTaskManager controllerTaskManager = new ModelTaskManager();
-        try (FileInputStream in = new FileInputStream("src/main/repository.txt")) {
-            ModelTaskManager.deserializeRepository(in);
+        Model controller = new Model();
 
+        try (FileInputStream in = new FileInputStream("src/main/repository.txt")) {
+            controller.repositoryTask = Model.deserializeRepository(in);
         }
 
-//        controllerTaskManager.createUsers();
-//        controllerTaskManager.createUsersDefault();
-//        controllerTaskManager.createUsersDefault();
-        controllerTaskManager.repository.getAllUsers();
+
+//        controller.createUsers();
+//        controller.repositoryTask.removeUser(2222);
+        controller.repositoryTask.getAllUsers();
+
+
 //        View view = new View();
 //        view.consoleInput();
 
 
-        try (FileOutputStream out = new FileOutputStream("src/main/repository.txt")) {
-            ModelTaskManager.serializeRepository(controllerTaskManager.repository, out);
-        }
+//        try (FileOutputStream out = new FileOutputStream("src/main/repository.txt")) {
+//            Model.serializeRepository(controller.repositoryTask, out);
+//        }
 
     }
 }

@@ -1,7 +1,7 @@
 package com.taskmanager.model;
 
 
-import com.taskmanager.ModelTaskManager;
+import com.taskmanager.Model;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,7 +19,7 @@ public class User implements Serializable {
     private String password;
 
     public User() {
-        this.ID = ModelTaskManager.createID();
+        this.ID = Model.createID();
         this.firstName = "defaultUser";
         this.lastName = "defaultUser";
         this.userName = "defaultUser";
@@ -27,7 +27,7 @@ public class User implements Serializable {
     }
 
     public User(String firstName, String lastName, String userName, String password) {
-        this.ID = ModelTaskManager.createID();
+        this.ID = Model.createID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;

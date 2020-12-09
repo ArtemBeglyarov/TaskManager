@@ -9,15 +9,15 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RepositoryTaskManager implements Serializable {
+public class Repository implements Serializable {
 
-    private static RepositoryTaskManager instance;
+    private static Repository instance;
 
-    RepositoryTaskManager() {}
+    Repository() {}
 
-    public static RepositoryTaskManager getInstance() {
+    public static Repository getInstance() {
         if (instance == null) {
-            instance = new RepositoryTaskManager();
+            instance = new Repository();
         }
         return instance;
     }
