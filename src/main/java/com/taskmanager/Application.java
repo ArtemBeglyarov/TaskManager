@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public class Application {
     public static void main(String[] args) throws IOException {
+
         Model controller = new Model();
 
         try (FileInputStream in = new FileInputStream("src/main/repository.txt")) {
