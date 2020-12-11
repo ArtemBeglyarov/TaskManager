@@ -1,5 +1,6 @@
 package com.taskmanager;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.taskmanager.model.Project;
 import com.taskmanager.model.Task;
 import com.taskmanager.model.User;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+@JsonAutoDetect
 public class Repository implements Serializable {
 
     private static Repository instance;

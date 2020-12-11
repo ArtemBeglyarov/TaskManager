@@ -1,5 +1,7 @@
 package com.taskmanager;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taskmanager.model.Project;
 import com.taskmanager.model.User;
 
@@ -89,5 +91,16 @@ public class Model implements Serializable{
             e.printStackTrace();
         }
         return temp;
+    }
+    public  void json(Repository repository) {
+        ObjectMapper mapper = new ObjectMapper();
+        try(OutputStream fileStream = new FileOutputStream("movielist.json")) {
+
+
+            mapper.writeValue(repository);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
     }
 }

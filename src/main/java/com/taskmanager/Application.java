@@ -19,6 +19,7 @@ public class Application {
 //        controller.repositoryTask.removeUser(2222);
         controller.repositoryTask.getAllUsers();
 
+        controller.json(controller.repositoryTask);
 
 //        View view = new View();
 //        view.consoleInput();
