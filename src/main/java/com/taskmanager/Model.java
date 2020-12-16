@@ -92,15 +92,15 @@ public class Model implements Serializable{
         }
         return temp;
     }
-    public  void json(Repository repository) {
+    public  void jsonSave(Repository repository) {
         ObjectMapper mapper = new ObjectMapper();
-        try(OutputStream fileStream = new FileOutputStream("movielist.json")) {
 
+        try {
+            mapper.writeValue(new File("repository1.json"),repository);
 
-            mapper.writeValue(repository);
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
 }

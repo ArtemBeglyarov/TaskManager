@@ -1,6 +1,7 @@
 package com.taskmanager;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.taskmanager.model.Project;
 import com.taskmanager.model.Task;
 import com.taskmanager.model.User;
@@ -23,9 +24,11 @@ public class Repository implements Serializable {
         }
         return instance;
     }
-
+    @JsonView
     final Map<Long, User> userMap = new HashMap<>();
+    @JsonView
     final Map<Long, Project> projectMap = new HashMap<>();
+    @JsonView
     final Map<Long, Task> taskMap = new HashMap<>();
 
     /**

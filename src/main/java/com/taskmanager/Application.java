@@ -2,7 +2,6 @@ package com.taskmanager;
 
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Application {
@@ -19,7 +18,7 @@ public class Application {
 //        controller.repositoryTask.removeUser(2222);
         controller.repositoryTask.getAllUsers();
 
-        controller.json(controller.repositoryTask);
+        controller.jsonSave(controller.repositoryTask);
 
 //        View view = new View();
 //        view.consoleInput();
