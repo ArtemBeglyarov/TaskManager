@@ -1,6 +1,8 @@
 package com.taskmanager;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taskmanager.model.Project;
 import com.taskmanager.model.User;
@@ -102,5 +104,19 @@ public class Model implements Serializable{
             e.printStackTrace();
         }
     }
-
+    public Repository jsonLoad() {
+        Repository temp = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            temp = mapper.readValue(new File("C:\\Users\\BeglyarovAM\\Documents\\GitHub\\TaskManager\\repository1.json"), Repository.class);
+            System.out.println();
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return temp;
+    }
 }

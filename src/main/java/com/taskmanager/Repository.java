@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @JsonAutoDetect
+
 public class Repository implements Serializable {
 
     private static Repository instance;

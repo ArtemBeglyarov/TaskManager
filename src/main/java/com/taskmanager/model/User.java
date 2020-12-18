@@ -1,12 +1,13 @@
 package com.taskmanager.model;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.taskmanager.Model;
 import lombok.Data;
 
 import java.io.Serializable;
-
 @Data
+@JsonView
 public class User implements Serializable {
     private final long ID;
 
