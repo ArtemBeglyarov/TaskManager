@@ -1,14 +1,17 @@
 package com.taskmanager.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.taskmanager.Model;
 import lombok.Data;
 
 import java.io.Serializable;
+
 @Data
 @JsonView
 public class User implements Serializable {
+    @JsonProperty("id")
     private final long ID;
 
     private String firstName;
@@ -26,7 +29,6 @@ public class User implements Serializable {
         this.userName = "defaultUser";
         this.password = "defaultUser";
     }
-
     public User(String firstName, String lastName, String userName, String password) {
         this.ID = Model.createID();
         this.firstName = firstName;

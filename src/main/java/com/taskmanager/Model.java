@@ -108,7 +108,7 @@ public class Model implements Serializable{
         Repository temp = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            temp = mapper.readValue(new File("C:\\Users\\BeglyarovAM\\Documents\\GitHub\\TaskManager\\repository1.json"), Repository.class);
+            temp = mapper.readValue(new File("repository1.json"), Repository.class);
             System.out.println();
         } catch (JsonParseException e) {
             e.printStackTrace();
