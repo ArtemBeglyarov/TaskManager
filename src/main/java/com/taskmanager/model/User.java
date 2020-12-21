@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Data
 @JsonView
-public class User implements Serializable {
+public class User implements Serializable  {
     @JsonProperty("id")
     private final long ID;
 

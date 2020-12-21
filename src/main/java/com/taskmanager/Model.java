@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 
 
-public class Model implements Serializable{
+public class Model{
 
     private static Model instance;
     Repository repositoryTask = new Repository();
@@ -77,12 +77,12 @@ public class Model implements Serializable{
         repositoryTask.addProject(project.getID(),project);
         return project;
     }
-    public static void serializeRepository(Repository repository, OutputStream out) throws IOException {
+    public static void jsonSave(Repository repository, OutputStream out) throws IOException {
         ObjectOutputStream serialize = new ObjectOutputStream(out);
         serialize.writeObject(repository);
     }
 
-    public static Repository deserializeRepository(InputStream in) throws IOException {
+    public static Repository jsonLoad(InputStream in) throws IOException {
         Repository temp = null;
         try {
         ObjectInputStream deserialize = new ObjectInputStream(in);
@@ -110,10 +110,6 @@ public class Model implements Serializable{
             ObjectMapper mapper = new ObjectMapper();
             temp = mapper.readValue(new File("repository1.json"), Repository.class);
             System.out.println();
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

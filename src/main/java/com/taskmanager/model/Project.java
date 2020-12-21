@@ -1,5 +1,7 @@
 package com.taskmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.taskmanager.Model;
 import lombok.Data;
 
@@ -9,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Project implements Serializable {
-
+@JsonView
+public class Project implements Serializable  {
+    @JsonProperty("id")
     private final long ID;
 
     private String nameProject;

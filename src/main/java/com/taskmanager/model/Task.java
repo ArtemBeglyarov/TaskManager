@@ -1,5 +1,7 @@
 package com.taskmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.taskmanager.Model;
 import lombok.Data;
 
@@ -7,15 +9,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class Task implements Serializable {
-    public enum Priority implements Serializable{
+@JsonView
+public class Task implements Serializable  {
+    public enum Priority {
         HIGHEST,
         HIGH,
         NORMAL,
         LOW,
     }
 
-    public enum Status implements Serializable {
+    public enum Status  {
         OPEN,
         SUSPENDED,
         ASSIGNED,
@@ -24,6 +27,7 @@ public class Task implements Serializable {
 
     }
 
+    @JsonProperty("id")
     private final long ID;
 
     private String name;

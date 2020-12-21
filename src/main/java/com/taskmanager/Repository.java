@@ -3,7 +3,6 @@ package com.taskmanager;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.taskmanager.model.Project;
 import com.taskmanager.model.Task;
 import com.taskmanager.model.User;
