@@ -1,15 +1,17 @@
 package com.taskmanager;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.sun.org.apache.xpath.internal.operations.String;
 import com.taskmanager.model.Project;
+import com.taskmanager.model.Task;
 import com.taskmanager.model.User;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,7 +20,8 @@ import java.util.Scanner;
 public class Model{
 
     private static Model instance;
-    Repository repositoryTask = new Repository();
+    Repository repository = Repository.getInstance();
+    //TODO зачем здесь он
     Scanner scanner = new Scanner(System.in);
 
     Model(){}
@@ -29,53 +32,96 @@ public class Model{
         }
         return instance;
     }
-    public static long createID() {
+    //TODO ограничить типы как?
+    public static long createID(Class type) {
 
         Random random = new Random();
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
-
-        int randomID = random.nextInt(1000);
-        long ID = Long.parseLong(date.format(formatter) + randomID);
-        return ID;
+        while ( true ){
+            int randomID = random.nextInt(1000);
+            long ID = Long.parseLong(date.format(formatter) + randomID);
+            if(type == Project.class && !Model.getInstance().repository.projectMap.containsKey(ID)){
+                    return ID;
+            } else if( type == Task.class){
+                if (!Model.getInstance().repository.taskMap.containsKey(ID)){
+                    return ID;
+                }
+            }else if (type == User.class){
+                if (!Model.getInstance().repository.userMap.containsKey(ID)){
+                    return ID;
+                }
+            }
+            else return 0;
+        }
     }
 
-    public  User createUsers() {
-
-        System.out.println("you First Name");
+    public  User createUsers(String firstName, String lastName, String userName, String password) {
+       /* System.out.println("you First Name");
         String firstName = scanner.nextLine();
-
         System.out.println("you Last Name");
         String lastName = scanner.nextLine();
-
         System.out.println("User Name");
-        String userName = scanner.nextLine();
-
+       String userName = scanner.nextLine();
         System.out.println("Password");
-        String password = scanner.nextLine();
-
+        String password = scanner.nextLine();*/
         User user = new User(firstName,lastName,userName,password);
-
-        repositoryTask.addUser(user.getID(),user);
-
-
+        repository.addUser(user.getID(),user);
         return user;
     }
-    public  User createUsersDefault() {
+    /*public  User createUsersDefault() {
         User user = new User();
-        repositoryTask.addUser(user.getID(),user);
+        repository.addUser(user.getID(),user);
         return user;
+    }*/
+
+    public User readUser(long ID){
+      return repository.userMap.get(ID);
     }
-    public Project createProject() {
-        System.out.println("Name Project");
+
+    public void updateUser(long ID, User user){
+        repository.userMap.replace(ID, user);
+    }
+    public void deleteUser(long ID){
+        repository.userMap.remove(ID);
+    }
+    public void createTask(String name, Task.Status status, Task.Priority priority, String description,
+                              Date startData, Date duoDate, Date endDate,
+                              long projectId, long reporterId, long assigneeId){
+        Task task = new Task(name, status, priority, description, startData, duoDate,
+                endDate, projectId, reporterId, assigneeId);
+        repository.addTask(task.getID(), task);
+    }
+
+    public Task readTask(long ID){
+        return repository.taskMap.get(ID);
+    }
+    public void updateTask(long ID, Task task){
+        repository.taskMap.replace(ID, task);
+    }
+    public void deleteTask(long ID) {
+        repository.taskMap.remove(ID);
+    }
+
+    public Project createProject(String nameProject, List<Long> usersID, List<Long> tasksID, String description, Long creatorID) {
+        /*System.out.println("Name Project");
         String projectName = scanner.nextLine();
 
         System.out.println("describe the project");
-        String description = scanner.nextLine();
+        String description = scanner.nextLine();*/
 
-        Project project = new Project();
-        repositoryTask.addProject(project.getID(),project);
+        Project project = new Project(nameProject, usersID, tasksID, description, creatorID );
+        repository.addProject(project.getID(),project);
         return project;
+    }
+    public Project readProject(long ID){
+        return repository.projectMap.get(ID);
+    }
+    public void updateProject(long ID, Project project){
+       repository.projectMap.replace(ID, project);
+    }
+    public void deleteProject(long ID) {
+        repository.projectMap.remove(ID);
     }
     public static void jsonSave(Repository repository, OutputStream out) throws IOException {
         ObjectOutputStream serialize = new ObjectOutputStream(out);

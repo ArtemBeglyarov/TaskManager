@@ -13,24 +13,22 @@ import java.io.Serializable;
 public class User implements Serializable  {
     @JsonProperty("id")
     private final long ID;
-
     private String firstName;
-
     private String lastName;
-
     private String userName;
-
     private String password;
+    private final String DEFAULT_STRING = "defaultUser";
+
 
     public User() {
-        this.ID = Model.createID();
-        this.firstName = "defaultUser";
-        this.lastName = "defaultUser";
-        this.userName = "defaultUser";
-        this.password = "defaultUser";
+        this.ID = Model.createID(User.class);
+        this.firstName = DEFAULT_STRING;
+        this.lastName = DEFAULT_STRING;
+        this.userName = DEFAULT_STRING;
+        this.password = DEFAULT_STRING;
     }
     public User(String firstName, String lastName, String userName, String password) {
-        this.ID = Model.createID();
+        this.ID = Model.createID(User.class);
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;

@@ -18,31 +18,33 @@ public class Project implements Serializable  {
 
     private String nameProject;
 
-    private List<User> users;
+    //private List<User> users;
+    private List<Long> usersId;
 
-    private List<Task> tasks;
+    //private List<Task> tasks;
+    private List<Long> tasksId;
 
     private String description;
 
-    private User creator;
+    private Long creatorID;
 
 
     public Project() {
-        this.ID = Model.createID();
+        this.ID = Model.createID(Project.class);
         this.nameProject = "default";
-        this.users = new ArrayList<>();
-        this.tasks = new ArrayList<>();
+        this.usersId = new ArrayList<>();
+        this.tasksId = new ArrayList<>();
         this.description = "default";
-        this.creator = new User();
+        this.creatorID = 0L;
     }
 
-    public Project(String nameProject, List<User> users, List<Task> tasks, String description, User creator) {
-        this.ID = Model.createID();
+    public Project(String nameProject, List<Long> usersID, List<Long> tasksID, String description, Long creatorID) {
+        this.ID = Model.createID(Project.class);
         this.nameProject = nameProject;
-        this.users = users;
-        this.tasks = tasks;
+        this.usersId = usersID;
+        this.tasksId = tasksID;
         this.description = description;
-        this.creator = creator;
+        this.creatorID = creatorID;
     }
 
     @Override
@@ -50,10 +52,12 @@ public class Project implements Serializable  {
         return
                 "projectID=" + ID +
                         ", nameProject='" + nameProject + '\'' +
-                        ", users=" + users +
-                        ", tasks=" + tasks +
+                        ", users=" + usersId +
+                        ", tasks=" + tasksId +
                         ", description='" + description + '\'' +
-                        ", creator=" + creator;
+                        ", creator=" + creatorID;
 
     }
+
+
 }

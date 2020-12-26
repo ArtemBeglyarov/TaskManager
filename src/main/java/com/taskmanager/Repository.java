@@ -17,8 +17,8 @@ import java.util.Map;
 public class Repository implements Serializable {
     @JsonIgnore
     private static Repository instance;
-
-    Repository() {}
+    //заприватил конструктор
+   private Repository() {}
 
     public static Repository getInstance() {
         if (instance == null) {
@@ -26,6 +26,7 @@ public class Repository implements Serializable {
         }
         return instance;
     }
+
     @JsonProperty
     final Map<Long, User> userMap = new HashMap<>();
     @JsonProperty
@@ -36,7 +37,7 @@ public class Repository implements Serializable {
     /**
      * Operations on objects User
      */
-    public void addUser(Long id, User user) {
+    public void addUser(long id, User user) {
        userMap.put(id, user);
     }
 
@@ -47,7 +48,7 @@ public class Repository implements Serializable {
     public void removeUser(long id) {
         userMap.remove(id);
     }
-
+    //TODO вынести во view
     public void getAllUsers() {
         for (User k : userMap.values()) {
             System.out.println(k.toString());
