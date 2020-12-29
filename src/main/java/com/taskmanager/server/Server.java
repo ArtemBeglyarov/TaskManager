@@ -2,21 +2,22 @@ package com.taskmanager.server;
 
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
+
 
 public class Server {
     public static void main(String[] args) throws IOException {
 
-        try {
             ServerSocket serverSocket = new ServerSocket(9000);
+        try {
             while (true) {
+
 
                 Socket socket = serverSocket.accept();
                 new ThreadServer(socket);
 
             }
         } catch (IOException e) {
-
+          serverSocket.close();
         }
 
     }
@@ -36,12 +37,9 @@ class ThreadServer extends Thread {
         try {
             while (true) {
                 BufferedReader read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                BufferedWriter writ = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-                String str = read.readLine();
-                if (str.equals("END"))
-                    break;
-                System.out.println("Получено: " + str);
-                System.out.println(str);
+                PrintWriter writ = new PrintWriter (new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
+                writ.ц
+
             }
 
 
