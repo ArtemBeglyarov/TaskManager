@@ -10,14 +10,14 @@ public class Server {
             ServerSocket serverSocket = new ServerSocket(9000);
         try {
             while (true) {
-
-
                 Socket socket = serverSocket.accept();
                 new ThreadServer(socket);
-
             }
         } catch (IOException e) {
-          serverSocket.close();
+          e.printStackTrace();
+        }
+        finally {
+            serverSocket.close();
         }
 
     }
@@ -27,7 +27,6 @@ class ThreadServer extends Thread {
     Socket socket;
 
     public ThreadServer(Socket socket) {
-
         this.socket = socket;
         start();
     }
@@ -38,11 +37,10 @@ class ThreadServer extends Thread {
             while (true) {
                 BufferedReader read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter writ = new PrintWriter (new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
-                writ.ц
-
+                writ.println("press F");
+                String str  = read.readLine();
+                System.out.println(str);
             }
-
-
         } catch (
                 IOException e) {
             e.printStackTrace();
