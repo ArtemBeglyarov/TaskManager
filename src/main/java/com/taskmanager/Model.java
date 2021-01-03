@@ -91,6 +91,7 @@ public class Model{
         Task task = new Task(name, status, priority, description, startData, duoDate,
                 endDate, projectId, reporterId, assigneeId);
         repository.addTask(task.getID(), task);
+
     }
 
     public Task readTask(long ID){
