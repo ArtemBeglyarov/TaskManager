@@ -1,8 +1,7 @@
 package com.taskmanager;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.sun.org.apache.xpath.internal.operations.String;
+
 import com.taskmanager.model.Project;
 import com.taskmanager.model.Task;
 import com.taskmanager.model.User;
@@ -16,15 +15,15 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-
-public class Model{
+public class Model {
 
     private static Model instance;
     Repository repository = Repository.getInstance();
     //TODO зачем здесь он
     Scanner scanner = new Scanner(System.in);
 
-    Model(){}
+    private Model() {
+    }
 
     public static Model getInstance() {
         if (instance == null) {
@@ -32,41 +31,34 @@ public class Model{
         }
         return instance;
     }
+
     //TODO ограничить типы как?
     public static long createID(Class type) {
 
         Random random = new Random();
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
-        while ( true ){
+        while (true) {
             int randomID = random.nextInt(1000);
             long ID = Long.parseLong(date.format(formatter) + randomID);
-            if(type == Project.class && !Model.getInstance().repository.projectMap.containsKey(ID)){
-                    return ID;
-            } else if( type == Task.class){
-                if (!Model.getInstance().repository.taskMap.containsKey(ID)){
-                    return ID;
-                }
-            }else if (type == User.class){
-                if (!Model.getInstance().repository.userMap.containsKey(ID)){
+            if (type == Project.class && !Model.getInstance().repository.projectMap.containsKey(ID)) {
+                return ID;
+            } else if (type == Task.class) {
+                if (!Model.getInstance().repository.taskMap.containsKey(ID)) {
                     return ID;
                 }
-            }
-            else return 0;
+            } else if (type == User.class) {
+                if (!Model.getInstance().repository.userMap.containsKey(ID)) {
+                    return ID;
+                }
+            } else return 0;
         }
     }
 
-    public  User createUsers(String firstName, String lastName, String userName, String password) {
-       /* System.out.println("you First Name");
-        String firstName = scanner.nextLine();
-        System.out.println("you Last Name");
-        String lastName = scanner.nextLine();
-        System.out.println("User Name");
-       String userName = scanner.nextLine();
-        System.out.println("Password");
-        String password = scanner.nextLine();*/
-        User user = new User(firstName,lastName,userName,password);
-        repository.addUser(user.getID(),user);
+    public User createUsers(String firstName, String lastName, String userName, String password) {
+
+        User user = new User(firstName, lastName, userName, password);
+        repository.addUser(user.getID(), user);
         return user;
     }
     /*public  User createUsersDefault() {
@@ -75,31 +67,35 @@ public class Model{
         return user;
     }*/
 
-    public User readUser(long ID){
-      return repository.userMap.get(ID);
+    public User readUser(long ID) {
+        return repository.userMap.get(ID);
     }
 
-    public void updateUser(long ID, User user){
+    public void updateUser(long ID, User user) {
         repository.userMap.replace(ID, user);
     }
-    public void deleteUser(long ID){
+
+    public void deleteUser(long ID) {
         repository.userMap.remove(ID);
     }
+
     public void createTask(String name, Task.Status status, Task.Priority priority, String description,
-                              Date startData, Date duoDate, Date endDate,
-                              long projectId, long reporterId, long assigneeId){
+                           Date startData, Date duoDate, Date endDate,
+                           long projectId, long reporterId, long assigneeId) {
         Task task = new Task(name, status, priority, description, startData, duoDate,
                 endDate, projectId, reporterId, assigneeId);
         repository.addTask(task.getID(), task);
 
     }
 
-    public Task readTask(long ID){
+    public Task readTask(long ID) {
         return repository.taskMap.get(ID);
     }
-    public void updateTask(long ID, Task task){
+
+    public void updateTask(long ID, Task task) {
         repository.taskMap.replace(ID, task);
     }
+
     public void deleteTask(long ID) {
         repository.taskMap.remove(ID);
     }
@@ -111,19 +107,23 @@ public class Model{
         System.out.println("describe the project");
         String description = scanner.nextLine();*/
 
-        Project project = new Project(nameProject, usersID, tasksID, description, creatorID );
-        repository.addProject(project.getID(),project);
+        Project project = new Project(nameProject, usersID, tasksID, description, creatorID);
+        repository.addProject(project.getID(), project);
         return project;
     }
-    public Project readProject(long ID){
+
+    public Project readProject(long ID) {
         return repository.projectMap.get(ID);
     }
-    public void updateProject(long ID, Project project){
-       repository.projectMap.replace(ID, project);
+
+    public void updateProject(long ID, Project project) {
+        repository.projectMap.replace(ID, project);
     }
+
     public void deleteProject(long ID) {
         repository.projectMap.remove(ID);
     }
+
     public static void jsonSave(Repository repository, OutputStream out) throws IOException {
         ObjectOutputStream serialize = new ObjectOutputStream(out);
         serialize.writeObject(repository);
@@ -132,25 +132,26 @@ public class Model{
     public static Repository jsonLoad(InputStream in) throws IOException {
         Repository temp = null;
         try {
-        ObjectInputStream deserialize = new ObjectInputStream(in);
+            ObjectInputStream deserialize = new ObjectInputStream(in);
 
             temp = (Repository) deserialize.readObject();
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return temp;
     }
-    public  void jsonSave(Repository repository) {
+
+    public void jsonSave(Repository repository) {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            mapper.writeValue(new File("repository1.json"),repository);
+            mapper.writeValue(new File("repository1.json"), repository);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public Repository jsonLoad() {
         Repository temp = null;
         try {

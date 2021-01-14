@@ -18,6 +18,8 @@ public class Controller {
         }
         return instance;
     }
+
+
     public void addTaskInProject(long projectID, long taskID){
         //TODO проверка на уникальность таска
        Project project = Model.getInstance().readProject(projectID);
@@ -32,4 +34,5 @@ public class Controller {
             Model.getInstance().deleteTask(taskID);
         }
     }
+
 }
