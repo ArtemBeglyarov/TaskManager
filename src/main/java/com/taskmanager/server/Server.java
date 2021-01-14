@@ -3,6 +3,7 @@ package com.taskmanager.server;
 import com.taskmanager.Controller;
 import com.taskmanager.Model;
 import com.taskmanager.Repository;
+import com.taskmanager.model.User;
 
 import java.io.*;
 import java.net.*;
@@ -23,6 +24,7 @@ public class Server {
             while (true) {
                 Socket socket = serverSocket.accept();
                 new ThreadServer(socket,model,controller,repository);
+                model.jsonSave(repository);
             }
         } catch (IOException e) {
           e.printStackTrace();
@@ -30,7 +32,7 @@ public class Server {
         finally {
             serverSocket.close();
         }
-        model.jsonSave(repository);
+
     }
 }
 
@@ -54,14 +56,16 @@ class ThreadServer extends Thread {
             while (true) {
                 BufferedReader read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter writ = new PrintWriter (new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
-                writ.println("Sing in or Sing up");
+                writ.println(" input :sing in or sing up");
                 String str  = read.readLine();
                 switch (str) {
 
-                    case "Sing in":
-                        break;
+                    case "sing in":
+                        writ.println("");
+                        if (repository.getUser()
 
-                    case "Sing up":
+
+                    case "sing up":
                         writ.println("Enter your first name");
                         String firstName = read.readLine();
                                 writ.println("Enter your last name");
@@ -71,11 +75,13 @@ class ThreadServer extends Thread {
                                 writ.println("create a password");
                         String password = read.readLine();
 
-                        model.createUsers(firstName,lastName,userName,password);
+                        User idUser = model.createUsers(firstName,lastName,userName,password);;
+                        writ.println(idUser.getID() + " your ID ");
+                        writ.println("pleas sing in");
 
                         break;
                     case "exit":
-                        writ.println("выход");
+                        writ.println("your exit");
                         System.out.println("User left the server");
                         break;
                 }
