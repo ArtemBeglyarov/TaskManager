@@ -1,8 +1,7 @@
 package com.taskmanager.model;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 import com.taskmanager.Model;
 import lombok.Data;
 
@@ -10,30 +9,38 @@ import java.io.Serializable;
 
 @Data
 @JsonView
-public class User implements Serializable  {
+public class User implements Serializable {
     @JsonProperty("id")
-    private final long ID;
+    private  long ID;
     private String firstName;
     private String lastName;
     private String userName;
     private String password;
 
+    public User() {
 
+    }
 
-//    public User() {
-//        this.ID = Model.createID(User.class);
-//        this.firstName = DEFAULT_STRING;
-//        this.lastName = DEFAULT_STRING;
-//        this.userName = DEFAULT_STRING;
-//        this.password = DEFAULT_STRING;
-//    }
     public User(String firstName, String lastName, String userName, String password) {
-        this.ID = Model.createID(User.class);
+
+        this.ID =Model.createID(User.class);
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
     }
+
+//    public User(  long ID, String firstName, String lastName, String userName, String password) {
+//        this.ID = ID;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.userName = userName;
+//        this.password = password;
+//    }
+
+
+
+
 
     @Override
     public String toString() {

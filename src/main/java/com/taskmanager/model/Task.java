@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Data
 @JsonView
-public class Task implements Serializable  {
+public class Task implements Serializable {
     public enum Priority {
         HIGHEST,
         HIGH,
@@ -18,7 +18,7 @@ public class Task implements Serializable  {
         LOW,
     }
 
-    public enum Status  {
+    public enum Status {
         OPEN,
         SUSPENDED,
         ASSIGNED,
@@ -28,7 +28,7 @@ public class Task implements Serializable  {
     }
 
     @JsonProperty("id")
-    private final long ID;
+    private long ID;
     private String name;
     private Status status;
     private Priority priority;
@@ -45,7 +45,9 @@ public class Task implements Serializable  {
     public final Priority DEFAULT_PRIORITY = Priority.NORMAL;
     public final Status DEFAULT_STATUS = Status.OPEN;
 
-    public Task( String name, Status status, Priority priority, String description,
+
+
+    public Task(String name, Status status, Priority priority, String description,
                 Date startData, Date duoDate, Date endDate, long projectId, long reporterId, long assigneeId) {
         this.ID = Model.createID(Task.class);
         this.name = name;

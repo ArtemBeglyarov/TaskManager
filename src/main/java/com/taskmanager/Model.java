@@ -55,7 +55,8 @@ public class Model {
         }
     }
 
-    public User createUsers(String firstName, String lastName, String userName, String password) {
+    public User createUsers( String firstName, String lastName, String userName, String password) {
+
 
         User user = new User(firstName, lastName, userName, password);
         repository.addUser(user.getID(), user);
@@ -141,11 +142,11 @@ public class Model {
         return temp;
     }
 
-    public void jsonSave(Repository repository) {
+    public void jsonSave() {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            mapper.writeValue(new File("repository1.json"), repository);
+            mapper.writeValue(new File("repository1.json"), Repository.getInstance());
 
         } catch (IOException e) {
             e.printStackTrace();

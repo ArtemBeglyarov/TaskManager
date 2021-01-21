@@ -7,7 +7,7 @@ public class Client {
     public static void main(String[] args) throws IOException {
         try (Socket clientSocket = new Socket()) {
 
-            clientSocket.connect(new InetSocketAddress(InetAddress.getLocalHost(),9900));
+            clientSocket.connect(new InetSocketAddress(InetAddress.getLocalHost(),9990));
             Scanner scanner = new Scanner(clientSocket.getInputStream());
             Scanner scanner1 = new Scanner(System.in);
             PrintWriter writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())),true);
