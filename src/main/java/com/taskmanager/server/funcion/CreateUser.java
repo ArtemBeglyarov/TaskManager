@@ -8,11 +8,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class CreateUser implements ClientThreadFunctions {
-    Model model = Model.getInstance();
 
     @Override
-    public void requestResponse(BufferedReader read, PrintWriter writ) throws IOException {
-
+    public void requestResponse(BufferedReader read, PrintWriter writ, Model model) throws IOException {
 
 
         writ.println("Enter your first name");
@@ -26,6 +24,7 @@ public class CreateUser implements ClientThreadFunctions {
 
         User idUser = model.createUsers(firstName,lastName,userName,password);
         writ.println(idUser.getID() + " your ID ");
+
         model.jsonSave();
     }
 }

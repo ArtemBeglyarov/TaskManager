@@ -6,6 +6,7 @@ import com.taskmanager.Repository;
 import com.taskmanager.server.funcion.Authenticating;
 import com.taskmanager.server.funcion.ClientThreadFunctions;
 import com.taskmanager.server.funcion.CreateUser;
+import com.taskmanager.server.funcion.RemoveUser;
 
 import java.io.*;
 import java.net.*;
@@ -18,24 +19,23 @@ public class Server {
     public static void main(String[] args) throws IOException {
         Model model = Model.getInstance();
         Controller controller = Controller.getInstance();
-        Repository repository = model.jsonLoad();
+        Repository repository = Repository.getInstance();
         ServerSocket serverSocket = new ServerSocket(9990);
-        Map<String,ClientThreadFunctions> allFunctions = new HashMap<>();
+        Map<String, ClientThreadFunctions> allFunctions = new HashMap<>();
 
         allFunctions.put("sing in", new Authenticating());
-        allFunctions.put("sing up",new CreateUser());
-
+        allFunctions.put("sing up", new CreateUser());
+        allFunctions.put("remove user",new RemoveUser());
 
         try {
 
             while (true) {
                 Socket socket = serverSocket.accept();
-                new ThreadServer(socket,model,controller,repository,allFunctions);
+                new ThreadServer(socket, model, controller, repository, allFunctions);
             }
         } catch (IOException e) {
-          e.printStackTrace();
-        }
-        finally {
+            e.printStackTrace();
+        } finally {
             serverSocket.close();
         }
 
@@ -55,7 +55,7 @@ class ThreadServer extends Thread {
         this.allFunctions = allFunctions;
         this.socket = socket;
         this.model = model;
-        this.repository  = repository;
+        this.repository = repository;
         this.controller = controller;
         start();
     }
@@ -67,17 +67,18 @@ class ThreadServer extends Thread {
         try {
             while (true) {
                 BufferedReader read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                PrintWriter writ = new PrintWriter (new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
+                PrintWriter writ = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 
                 writ.println("sing in or sing up");
                 String temp = read.readLine();
 
-                if (allFunctions.get(temp).equals(temp) ) {
+                if (allFunctions.containsKey(temp)) {
+
                     ClientThreadFunctions current = allFunctions.get(temp);
-                    current.requestResponse(read, writ);
-                } else {
-                    writ.println("not found argument");
+                    current.requestResponse(read, writ,model);
+
                 }
+                writ.println("not found argument");
 
 
             }

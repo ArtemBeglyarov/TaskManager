@@ -3,11 +3,14 @@ package com.taskmanager;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taskmanager.model.Project;
 import com.taskmanager.model.Task;
 import com.taskmanager.model.User;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +18,7 @@ import java.util.Map;
 @JsonAutoDetect
 
 public class Repository implements Serializable {
+
     @JsonIgnore
     private static Repository instance;
     //заприватил конструктор
@@ -39,6 +43,7 @@ public class Repository implements Serializable {
      */
     public void addUser(long id, User user) {
        userMap.put(id, user);
+
     }
 
     public User getUser(long id) {
@@ -49,7 +54,7 @@ public class Repository implements Serializable {
         userMap.remove(id);
     }
     //TODO вынести во view
-    public int getAllUsers(String username, String password) {
+    public int checkUser(String username, String password) {
         int result = 0;
         for (User k : userMap.values()) {
             if (k.getUserName().equals(username) && k.getPassword().equals(password)) {

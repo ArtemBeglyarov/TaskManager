@@ -76,8 +76,11 @@ public class Model {
         repository.userMap.replace(ID, user);
     }
 
-    public void deleteUser(long ID) {
+    public void removeUser(long ID) {
         repository.userMap.remove(ID);
+    }
+    public Integer checkUsers(String userName, String password) {
+         return  repository.checkUser(userName,password);
     }
 
     public void createTask(String name, Task.Status status, Task.Priority priority, String description,
