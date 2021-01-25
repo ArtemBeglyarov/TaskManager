@@ -17,9 +17,10 @@ import java.util.Map;
 public class Server {
 
     public static void main(String[] args) throws IOException {
-        Model model = Model.getInstance();
         Controller controller = Controller.getInstance();
-        Repository repository = Repository.getInstance();
+        Model model = Model.getInstance();
+
+
         ServerSocket serverSocket = new ServerSocket(9990);
         Map<String, ClientThreadFunctions> allFunctions = new HashMap<>();
 
@@ -31,7 +32,7 @@ public class Server {
 
             while (true) {
                 Socket socket = serverSocket.accept();
-                new ThreadServer(socket, model, controller, repository, allFunctions);
+                new ThreadServer(socket, model, controller, allFunctions);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,14 +49,12 @@ class ThreadServer extends Thread {
     Map<String, ClientThreadFunctions> allFunctions;
     Model model;
     Controller controller;
-    Repository repository;
     Socket socket;
 
-    public ThreadServer(Socket socket, Model model, Controller controller, Repository repository, Map<String, ClientThreadFunctions> allFunctions) {
+    public ThreadServer(Socket socket, Model model, Controller controller,  Map<String, ClientThreadFunctions> allFunctions) {
         this.allFunctions = allFunctions;
         this.socket = socket;
         this.model = model;
-        this.repository = repository;
         this.controller = controller;
         start();
     }

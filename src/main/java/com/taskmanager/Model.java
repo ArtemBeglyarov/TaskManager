@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Model {
 
     private static Model instance;
-    Repository repository = Repository.getInstance();
+    Repository repository = jsonLoad();
     //TODO зачем здесь он
     Scanner scanner = new Scanner(System.in);
 
@@ -149,7 +149,7 @@ public class Model {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            mapper.writeValue(new File("repository1.json"), Repository.getInstance());
+            mapper.writeValue(new File("repository1.json"),repository);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -161,7 +161,7 @@ public class Model {
         try {
             ObjectMapper mapper = new ObjectMapper();
             temp = mapper.readValue(new File("repository1.json"), Repository.class);
-            System.out.println();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
