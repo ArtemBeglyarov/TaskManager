@@ -79,7 +79,7 @@ public class Model {
     public void removeUser(long ID) {
         repository.userMap.remove(ID);
     }
-    public Integer checkUsers(String userName, String password) {
+    public Integer isUserExist(String userName, String password) {
          return  repository.checkUser(userName,password);
     }
 
@@ -95,7 +95,6 @@ public class Model {
     public Task readTask(long ID) {
         return repository.taskMap.get(ID);
     }
-
     public void updateTask(long ID, Task task) {
         repository.taskMap.replace(ID, task);
     }

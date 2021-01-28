@@ -9,11 +9,11 @@ import java.io.PrintWriter;
 public class RemoveUser implements ClientThreadFunctions{
 
     @Override
-    public void requestResponse(BufferedReader read, PrintWriter writ, Model model) throws IOException {
-        writ.println("enter the user ID to delete");
+    public void requestResponse(BufferedReader read, PrintWriter write, Model model) throws IOException {
+        write.println("enter the user ID to delete");
         Long remove = Long.parseLong(read.readLine());
         model.removeUser(remove);
-        writ.println("user deleted");
+        write.println("user deleted");
 
         model.jsonSave();
     }

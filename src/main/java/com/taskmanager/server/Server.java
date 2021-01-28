@@ -6,6 +6,7 @@ import com.taskmanager.server.funcion.ClientThreadFunctions;
 import com.taskmanager.server.funcion.CreateUser;
 import com.taskmanager.server.funcion.RemoveUser;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.*;
 import java.util.HashMap;
@@ -44,7 +45,7 @@ public class Server {
 }
 
 class ThreadServer extends Thread {
-    static ThreadLocal<String> threadLocal = new ThreadLocal<>();
+
 
     Map<String, ClientThreadFunctions> allFunctions;
     Model model;
@@ -59,24 +60,34 @@ class ThreadServer extends Thread {
         start();
     }
 
-    public String authorization(BufferedReader read, PrintWriter writ, Model model) throws IOException {
-        String authorization = "user is not authorized";
+    public boolean authorization(BufferedReader read, PrintWriter write, Model model) throws IOException {
+        boolean authorization = false;
 
-        writ.println("input Username");
-        String username = read.readLine();
-        writ.println("input password");
-        String pass = read.readLine();
-        if (model.checkUsers(username, pass) == 0) {
-            writ.println("Incorrect username or password");
+        write.println("Sing up or Sing in");
 
-        } else {
-            authorization = "user is authorized";
-            writ.println("Welcome");
+
+        String temp = read.readLine();
+
+        if (temp.equals("sing in")) {
+
+
+            write.println("input Username");
+            String username = read.readLine();
+            write.println("input password");
+            String pass = read.readLine();
+            if (model.isUserExist(username, pass) == 0) {
+                write.println("Incorrect username or password");
+
+            } else {
+                authorization = true;
+                write.println("Welcome");
+            }
         }
-
+        if (temp.equals("sing up")) {
+            allFunctions.get(temp);
+        }
         return authorization;
     }
-
 
 
     @Override
@@ -85,28 +96,25 @@ class ThreadServer extends Thread {
         try {
             while (true) {
                 BufferedReader read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                PrintWriter writ = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+                PrintWriter write = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 
 
+                boolean authorization = false;
 
+                while (!authorization) {
 
-                writ.println("log in to use the task manager");
-                writ.println(allFunctions.keySet());
-
-                String temp = read.readLine();
-
-                if (allFunctions.containsKey(temp)) {
-                    while (threadLocal.equals("user is not authorized") ) {
-
-                        temp = "sing in";
-                    }
-                        ClientThreadFunctions current = allFunctions.get(temp);
-                        current.requestResponse(read, writ, model);
+                    authorization = authorization(read, write, model);
                 }
-                if (temp.equals("sing in")) {
-                    threadLocal.set(authorization(read, writ,model));
+
+                while (authorization) {
+                    write.println(allFunctions.keySet()+" - select command");
+
+                    String temp = read.readLine();
+
+                    ClientThreadFunctions current = allFunctions.get(temp);
+                    current.requestResponse(read, write, model);
+
                 }
-                writ.println("not found argument");
 
 
             }
