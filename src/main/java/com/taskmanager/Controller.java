@@ -1,9 +1,7 @@
 package com.taskmanager;
 
 import com.taskmanager.model.Project;
-import com.taskmanager.model.Task;
 
-import java.util.List;
 
 public class Controller {
     private static Controller instance;

@@ -8,13 +8,13 @@ public class Client {
         try (Socket clientSocket = new Socket()) {
 
             clientSocket.connect(new InetSocketAddress(InetAddress.getLocalHost(),9990));
-            Scanner scanner = new Scanner(clientSocket.getInputStream());
-            Scanner scanner1 = new Scanner(System.in);
-            PrintWriter writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())),true);
+            Scanner serverInput = new Scanner(clientSocket.getInputStream());
+            Scanner userInput = new Scanner(System.in);
+            PrintWriter serverWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())),true);
             while (true) {
-                System.out.println(scanner.nextLine());
-                String s = scanner1.nextLine();
-                writer.println(s);
+                System.out.println(serverInput.nextLine());
+                String s = userInput.nextLine();
+                serverWriter.println(s);
 
             }
 

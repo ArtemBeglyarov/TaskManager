@@ -51,6 +51,7 @@ class ThreadServer extends Thread {
     Model model;
     Controller controller;
     Socket socket;
+    private boolean authorization = false;
 
     public ThreadServer(Socket socket, Model model, Controller controller, Map<String, ClientThreadFunctions> allFunctions) {
         this.allFunctions = allFunctions;
@@ -80,7 +81,8 @@ class ThreadServer extends Thread {
 
             } else {
                 authorization = true;
-                write.println("Welcome");
+                write.print("Welcome");
+                write.flush();
             }
         }
         if (temp.equals("sing up")) {
@@ -99,25 +101,21 @@ class ThreadServer extends Thread {
                 PrintWriter write = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 
 
-                boolean authorization = false;
-
-                while (!authorization) {
+                if (!authorization) {
 
                     authorization = authorization(read, write, model);
-                }
+                } else {
 
-                while (authorization) {
-                    write.println(allFunctions.keySet()+" - select command");
+                    write.println(allFunctions.keySet() + " - select command");
 
                     String temp = read.readLine();
 
                     ClientThreadFunctions current = allFunctions.get(temp);
                     current.requestResponse(read, write, model);
-
                 }
 
-
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
