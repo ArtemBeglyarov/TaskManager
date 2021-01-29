@@ -45,9 +45,9 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User - " + userName +
-                "\n" + "ID  - " + ID +
-                "\n" + "First Name  - " + firstName +
-                "\n" + "Last Name  - " + lastName +
-                "\n" + "Password - " + password;
+                " " + "ID  - " + ID +
+                " " + "First Name  - " + firstName +
+                " " + "Last Name  - " + lastName +
+                " " + "Password - " + password;
     }
 }

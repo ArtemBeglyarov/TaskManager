@@ -23,8 +23,8 @@ public class CreateUser implements ClientThreadFunctions {
         String password = read.readLine();
 
         User idUser = model.createUsers(firstName,lastName,userName,password);
-        write.println(idUser.getID() + " your ID ");
-
+        write.println(idUser.toString());
+        write.flush();
         model.jsonSave();
     }
 }

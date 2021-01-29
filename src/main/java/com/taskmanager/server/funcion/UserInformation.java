@@ -7,26 +7,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class RemoveUser implements ClientThreadFunctions{
-
+public class UserInformation implements ClientThreadFunctions{
     @Override
     public void requestResponse(BufferedReader read, PrintWriter write, Model model) throws IOException {
-
         boolean existUser = false;
-        write.println("enter the user ID to delete");
-        Long ID = Long.parseLong(read.readLine());
-        User userToDelete = model.readUser(ID);
-        existUser = model.isUserExist(userToDelete.getUserName(),userToDelete.getPassword());
-        if (existUser) {
+        write.println("enter the user ID");
 
-            model.removeUser(ID);
-            write.println("user deleted");
-            write.flush();
-            model.jsonSave();
+        Long ID = Long.parseLong(read.readLine());
+        User userInformation = model.readUser(ID);
+        existUser = model.isUserExist(userInformation.getUserName(), userInformation.getPassword());
+        if (existUser) {
+            write.println("User information: "+userInformation.toString());
+
         } else {
             write.println("User is not found");
         }
-
-
     }
 }

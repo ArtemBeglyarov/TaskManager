@@ -5,6 +5,7 @@ import com.taskmanager.Model;
 import com.taskmanager.server.funcion.ClientThreadFunctions;
 import com.taskmanager.server.funcion.CreateUser;
 import com.taskmanager.server.funcion.RemoveUser;
+import com.taskmanager.server.funcion.UserInformation;
 
 import javax.swing.*;
 import java.io.*;
@@ -26,7 +27,8 @@ public class Server {
 
 
         allFunctions.put("sing up", new CreateUser());
-        allFunctions.put("remove user", new RemoveUser());
+        allFunctions.put("remove", new RemoveUser());
+        allFunctions.put("info", new UserInformation());
 
         try {
 
@@ -76,17 +78,18 @@ class ThreadServer extends Thread {
             String username = read.readLine();
             write.println("input password");
             String pass = read.readLine();
-            if (model.isUserExist(username, pass) == 0) {
+            if (model.isUserExist(username, pass) == false) {
                 write.println("Incorrect username or password");
 
             } else {
                 authorization = true;
                 write.print("Welcome");
-                write.flush();
             }
+            write.flush();
         }
         if (temp.equals("sing up")) {
-            allFunctions.get(temp);
+            ClientThreadFunctions current = allFunctions.get(temp);
+            current.requestResponse(read, write, model);
         }
         return authorization;
     }
@@ -107,7 +110,7 @@ class ThreadServer extends Thread {
                 } else {
 
                     write.println(allFunctions.keySet() + " - select command");
-
+                    write.flush();
                     String temp = read.readLine();
 
                     ClientThreadFunctions current = allFunctions.get(temp);

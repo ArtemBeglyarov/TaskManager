@@ -54,11 +54,11 @@ public class Repository implements Serializable {
         userMap.remove(id);
     }
     //TODO вынести во view
-    public int checkUser(String username, String password) {
-        int result = 0;
+    public boolean checkUser(String username, String password) {
+        boolean result = false;
         for (User k : userMap.values()) {
             if (k.getUserName().equals(username) && k.getPassword().equals(password)) {
-                result = 1;
+                result = true;
             }
         }
         return result;

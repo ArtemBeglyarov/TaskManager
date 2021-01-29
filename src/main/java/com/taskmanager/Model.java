@@ -79,7 +79,7 @@ public class Model {
     public void removeUser(long ID) {
         repository.userMap.remove(ID);
     }
-    public Integer isUserExist(String userName, String password) {
+    public boolean isUserExist(String userName, String password) {
          return  repository.checkUser(userName,password);
     }
 
