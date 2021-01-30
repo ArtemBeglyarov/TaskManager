@@ -20,11 +20,10 @@ public class RemoveUser implements ClientThreadFunctions{
         if (existUser) {
 
             model.removeUser(ID);
-            write.println("user deleted");
-            write.flush();
+            write.print("user deleted");
             model.jsonSave();
         } else {
-            write.println("User is not found");
+            write.print("User is not found");
         }
 
 

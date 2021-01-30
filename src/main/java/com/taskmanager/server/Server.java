@@ -34,13 +34,15 @@ public class Server {
 
             while (true) {
                 Socket socket = serverSocket.accept();
-                new ThreadServer(socket, model, controller, allFunctions);
+                new ThreadServer(socket, model, controller, allFunctions).start();
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             serverSocket.close();
         }
+
 
     }
 
@@ -60,13 +62,12 @@ class ThreadServer extends Thread {
         this.socket = socket;
         this.model = model;
         this.controller = controller;
-        start();
     }
 
     public boolean authorization(BufferedReader read, PrintWriter write, Model model) throws IOException {
         boolean authorization = false;
 
-        write.println("Sing up or Sing in");
+        write.println("Sing up or Sing in^");
 
 
         String temp = read.readLine();
@@ -74,16 +75,16 @@ class ThreadServer extends Thread {
         if (temp.equals("sing in")) {
 
 
-            write.println("input Username");
+            write.println("input Username^");
             String username = read.readLine();
-            write.println("input password");
+            write.println("input password^");
             String pass = read.readLine();
             if (model.isUserExist(username, pass) == false) {
-                write.println("Incorrect username or password");
+                write.println("Incorrect username or password^");
 
             } else {
                 authorization = true;
-                write.print("Welcome");
+                write.println("Welcome");
             }
             write.flush();
         }
@@ -109,8 +110,8 @@ class ThreadServer extends Thread {
                     authorization = authorization(read, write, model);
                 } else {
 
-                    write.println(allFunctions.keySet() + " - select command");
-                    write.flush();
+                    write.println(allFunctions.keySet() + " - select command^");
+
                     String temp = read.readLine();
 
                     ClientThreadFunctions current = allFunctions.get(temp);

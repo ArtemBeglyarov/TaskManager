@@ -24,7 +24,6 @@ public class CreateUser implements ClientThreadFunctions {
 
         User idUser = model.createUsers(firstName,lastName,userName,password);
         write.println(idUser.toString());
-        write.flush();
         model.jsonSave();
     }
 }

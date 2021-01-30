@@ -11,9 +11,9 @@ public class UserInformation implements ClientThreadFunctions{
     @Override
     public void requestResponse(BufferedReader read, PrintWriter write, Model model) throws IOException {
         boolean existUser = false;
-        write.println("enter the user ID");
+        write.println("enter the user ID^");
 
-        Long ID = Long.parseLong(read.readLine());
+        Long ID = Long.parseLong(read.readLine().trim());
         User userInformation = model.readUser(ID);
         existUser = model.isUserExist(userInformation.getUserName(), userInformation.getPassword());
         if (existUser) {
