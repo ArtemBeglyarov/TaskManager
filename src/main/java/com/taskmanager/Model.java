@@ -9,10 +9,7 @@ import com.taskmanager.model.User;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class Model {
@@ -32,7 +29,7 @@ public class Model {
         return instance;
     }
 
-    //TODO ограничить типы как?
+
     public static long createID(Class type) {
 
         Random random = new Random();
@@ -130,6 +127,10 @@ public class Model {
     public static void jsonSave(Repository repository, OutputStream out) throws IOException {
         ObjectOutputStream serialize = new ObjectOutputStream(out);
         serialize.writeObject(repository);
+    }
+    public Set<Map.Entry<Long, User>> getUsersEntrySet(){
+        return repository.userMap.entrySet();
+
     }
 
     public static Repository jsonLoad(InputStream in) throws IOException {

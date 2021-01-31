@@ -32,5 +32,4 @@ public class Controller {
             Model.getInstance().deleteTask(taskID);
         }
     }
-
 }

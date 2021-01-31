@@ -69,8 +69,6 @@ public class Task implements Serializable {
         this.priority = DEFAULT_PRIORITY;
         this.description = DEFAULT_STRING;
         this.startData = new Date();
-        this.duoDate = new Date();
-        //TODO какими должны быть даты по умолчанию.
         this.endDate = new Date();
         this.projectId = DEFAULT_LONG;
         this.reporterId = DEFAULT_LONG;

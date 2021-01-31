@@ -8,5 +8,5 @@ import java.io.PrintWriter;
 
 public interface ClientThreadFunctions {
 
-    public void requestResponse(BufferedReader read, PrintWriter write, Model model) throws IOException;
+    public void requestResponse(BufferedReader read, PrintWriter writ, Model model) throws IOException;
 }
