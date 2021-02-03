@@ -7,7 +7,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class ChangeStatusTask {
+public class ChangeStatusTask implements ClientThreadFunctions {
+    @Override
     public void requestResponse(BufferedReader read, PrintWriter writ, Model model) throws IOException {
         writ.println("enter you task");
         Long ID = Long.parseLong(read.readLine());

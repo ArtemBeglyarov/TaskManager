@@ -14,7 +14,7 @@ import java.util.List;
 @JsonView
 public class Project implements Serializable  {
     @JsonProperty("id")
-    private final long ID;
+    private  long ID;
 
     private String nameProject;
 
@@ -30,12 +30,7 @@ public class Project implements Serializable  {
 
 
     public Project() {
-        this.ID = Model.createID(Project.class);
-        this.nameProject = "default";
-        this.usersId = new ArrayList<>();
-        this.tasksId = new ArrayList<>();
-        this.description = "default";
-        this.creatorID = 0L;
+
     }
 
     public Project(String nameProject, List<Long> usersID, List<Long> tasksID, String description, Long creatorID) {
@@ -51,10 +46,10 @@ public class Project implements Serializable  {
     public String toString() {
         return
                 "projectID=" + ID +
-                        ", nameProject='" + nameProject + '\'' +
+                        ", nameProject='" + nameProject +
                         ", users=" + usersId +
                         ", tasks=" + tasksId +
-                        ", description='" + description + '\'' +
+                        ", description='" + description +
                         ", creator=" + creatorID;
 
     }

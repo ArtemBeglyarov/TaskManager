@@ -51,7 +51,9 @@ public class Model {
             } else return 0;
         }
     }
-
+    /**
+     * Operations on objects User
+     */
     public User createUsers( String firstName, String lastName, String userName, String password) {
 
 
@@ -80,6 +82,9 @@ public class Model {
          return  repository.checkUser(userName,password);
     }
 
+    /**
+     * Operations on objects Task
+     */
     public void createTask(String name, Task.Status status, Task.Priority priority, String description,
                            Date startData, Date duoDate, Date endDate,
                            long projectId, long reporterId, long assigneeId) {

@@ -2,10 +2,7 @@ package com.taskmanager.server;
 
 import com.taskmanager.Controller;
 import com.taskmanager.Model;
-import com.taskmanager.server.funcion.ClientThreadFunctions;
-import com.taskmanager.server.funcion.CreateUser;
-import com.taskmanager.server.funcion.RemoveUser;
-import com.taskmanager.server.funcion.UserInformation;
+import com.taskmanager.server.funcion.*;
 
 import javax.swing.*;
 import java.io.*;
@@ -29,6 +26,9 @@ public class Server {
         allFunctions.put("sing up", new CreateUser());
         allFunctions.put("remove", new RemoveUser());
         allFunctions.put("info", new UserInformation());
+        allFunctions.put("create project", new CreateProject());
+        allFunctions.put("add user project", new AddUserInProject());
+        allFunctions.put("create task", new CreateTask());
 
         try {
 

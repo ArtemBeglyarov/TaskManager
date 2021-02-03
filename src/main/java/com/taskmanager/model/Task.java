@@ -39,13 +39,14 @@ public class Task implements Serializable {
     private long projectId;
     private long reporterId; // исполнитель задачи
     private long assigneeId; //создател задачи
-    private final String DEFAULT_STRING = "default";
     //TODO если сгенерируется 0
     private final long DEFAULT_LONG = -1;
     public final Priority DEFAULT_PRIORITY = Priority.NORMAL;
     public final Status DEFAULT_STATUS = Status.OPEN;
 
+    public Task() {
 
+    }
 
     public Task(String name, Status status, Priority priority, String description,
                 Date startData, Date duoDate, Date endDate, long projectId, long reporterId, long assigneeId) {
@@ -62,16 +63,5 @@ public class Task implements Serializable {
         this.assigneeId = assigneeId;
     }
 
-    public Task() {
-        this.ID = Model.createID(Task.class);
-        this.name = DEFAULT_STRING;
-        this.status = DEFAULT_STATUS;
-        this.priority = DEFAULT_PRIORITY;
-        this.description = DEFAULT_STRING;
-        this.startData = new Date();
-        this.endDate = new Date();
-        this.projectId = DEFAULT_LONG;
-        this.reporterId = DEFAULT_LONG;
-        this.assigneeId = DEFAULT_LONG;
-    }
+
 }

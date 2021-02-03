@@ -13,13 +13,13 @@ public class CreateUser implements ClientThreadFunctions {
     public void requestResponse(BufferedReader read, PrintWriter write, Model model) throws IOException {
 
 
-        write.println("Enter your first name");
+        write.println("Enter your first name^");
         String firstName = read.readLine();
-        write.println("Enter your last name");
+        write.println("Enter your last name^");
         String lastName = read.readLine();
-        write.println("create a user name");
+        write.println("create a user name^");
         String userName = read.readLine();
-        write.println("create a password");
+        write.println("create a password^");
         String password = read.readLine();
 
         User idUser = model.createUsers(firstName,lastName,userName,password);

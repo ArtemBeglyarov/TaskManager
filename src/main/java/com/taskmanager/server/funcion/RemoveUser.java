@@ -13,17 +13,17 @@ public class RemoveUser implements ClientThreadFunctions{
     public void requestResponse(BufferedReader read, PrintWriter write, Model model) throws IOException {
 
         boolean existUser = false;
-        write.println("enter the user ID to delete");
+        write.println("enter the user ID to delete^");
         Long ID = Long.parseLong(read.readLine());
         User userToDelete = model.readUser(ID);
         existUser = model.isUserExist(userToDelete.getUserName(),userToDelete.getPassword());
         if (existUser) {
 
             model.removeUser(ID);
-            write.print("user deleted");
+            write.println("user deleted");
             model.jsonSave();
         } else {
-            write.print("User is not found");
+            write.println("User is not found");
         }
 
 
