@@ -13,6 +13,10 @@ public class AddUserInProject implements ClientThreadFunctions{
         write.println("enter the project ID^");
         Long projectID = Long.parseLong(read.readLine());
         Project project = model.readProject(projectID);
+        if( project ==null){
+            write.println(" ID is not vallide");
+            return;
+        }
         write.println("enter the user ID for add in project^");
         Long userID = Long.parseLong(read.readLine());
         project.getUsersId().add(userID);
