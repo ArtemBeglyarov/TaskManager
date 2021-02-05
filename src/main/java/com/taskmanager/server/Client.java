@@ -10,7 +10,7 @@ public class Client {
             clientSocket.connect(new InetSocketAddress(InetAddress.getLocalHost(),9990));
             Scanner serverInput = new Scanner(clientSocket.getInputStream());
             Scanner userInput = new Scanner(System.in);
-            serverInput.useDelimitesr("\\^");
+            serverInput.useDelimiter("\\^");
             PrintWriter serverWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())),true);
             while (true) {
                 System.out.println(serverInput.next());
